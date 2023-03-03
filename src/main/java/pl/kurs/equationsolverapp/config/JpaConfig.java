@@ -10,7 +10,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan(basePackages = { "pl.kurs.equationsolverapp.dao", "pl.kurs.equationsolverapp.service"})
 public class JpaConfig {
 
     @Bean
@@ -23,7 +22,7 @@ public class JpaConfig {
     }
 
     @Bean
-    @Profile({"prod"})
+    @Profile("prod")
     public JpaVendorAdapter createVendorAdapter(){
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.MYSQL);
@@ -32,7 +31,7 @@ public class JpaConfig {
         return adapter;
     }
     @Bean
-    @Profile({"prod"})
+    @Profile("prod")
     public DataSource createDataSource(){
         BasicDataSource ds = new BasicDataSource();
         ds.setUrl("jdbc:mysql://localhost:3306/equation_solve_app?useSSL=false&serverTimezone=UTC");
