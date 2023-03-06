@@ -20,11 +20,10 @@ public class EquationParser implements IEquationParse {
     @Override
     public String parseEquation(String input) throws UnknownOperatorException {
         String parseString = input
-                .replaceAll("[0-9]", "")
-                .replaceAll("\\s", "");
+                .replaceAll("[^0-9+\\-*/.\\s]", "");
         for (int i = 0; i < parseString.length(); i++) {
             char c = parseString.charAt(i);
-            if (!list.contains(c) && !Character.isDigit(c)) {
+            if (!list.contains(c) && !Character.isDigit(c) && c != '.') {
                 throw new UnknownOperatorException("Nieznany operator");
             }
         }
@@ -33,14 +32,15 @@ public class EquationParser implements IEquationParse {
 
     @Override
     public String parseFormat(String input) throws InvalidEquationFormatException {
-        if (!input.matches("[0-9+\\-*/\\s]+")) {
+        if (!input.matches("[0-9+\\-*/\\.\\s]*[0-9]+([.,][0-9]+)?")) {
             throw new InvalidEquationFormatException("Zły format wyrażenia ");
         }
-        String[] numbers = input.split("[+\\-*/]");
-        String[] operators = input.replaceAll("[0-9\\s]+", "").split("");
+        String[] numbers = input.split("[+\\-*/.]");
+        String[] operators = input.replaceAll("[0-9.\\s]+", "").split("");
         if (numbers.length - operators.length != 1) {
             throw new InvalidEquationFormatException("Zły format wyrażenia");
         }
+
         return input;
     }
 }

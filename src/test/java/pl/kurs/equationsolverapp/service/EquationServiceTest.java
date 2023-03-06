@@ -55,6 +55,12 @@ public class EquationServiceTest {
     }
 
     @Test
+    public void shouldEvaluateEquationWithSpacesAndDotReturnsNumericValue() throws Exception {
+        double result = equationService.evaluate("0.5 + 2");
+        assertEquals(2.5, result, 0.001);
+    }
+
+    @Test
     public void shouldEvaluateEquationWithTabsReturnsNumericValue() throws Exception {
         double result = equationService.evaluate("2\t+\t2");
         assertEquals(4.0, result, 0.001);

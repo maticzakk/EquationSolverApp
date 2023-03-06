@@ -16,7 +16,9 @@ public class Runner {
         IEquationService equationService = ctx.getBean(IEquationService.class);
 
         try {
-            System.out.println(equationService.evaluate(args[0]));
+            Scanner input = new Scanner(System.in);
+            String equation = input.nextLine();
+            System.out.println(equationService.evaluate(equation));
         } catch (InvalidEquationFormatException | UnknownOperatorException | ScriptException e) {
             e.printStackTrace();
         }

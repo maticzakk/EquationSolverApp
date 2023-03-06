@@ -24,9 +24,7 @@ public class EquationService implements IEquationService {
     }
 
     @Override
-    public double evaluate(String expression) throws UnknownOperatorException, InvalidEquationFormatException {
-        equationParse.parseEquation(expression);
-        equationParse.parseFormat(expression);
+    public double evaluate(String expression) throws InvalidEquationFormatException {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
         try {
